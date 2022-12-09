@@ -1,5 +1,7 @@
 <?php
 
+use App\Commands\StartCommand;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +54,7 @@ return [
     | your default bot for regular use.
     |
     */
-    'default'                      => 'mybot',
+    'default'                      => 'trelloTasksBot',
 
     /*
     |--------------------------------------------------------------------------
@@ -111,7 +113,8 @@ return [
     |
     */
     'commands'                     => [
-        Telegram\Bot\Commands\HelpCommand::class,
+        StartCommand::class,
+
     ],
 
     /*
