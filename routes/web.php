@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebhookController;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,9 @@ Route::get('/', function () {
 
 Route::post('/webhook', WebhookController::class)
     ->name('webhook.receive');
+
+//Route::get('webhook', function () {
+//    return response()->noContent(Response::HTTP_OK);
+//})->name('get.trello');
+
+

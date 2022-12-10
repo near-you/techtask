@@ -10,7 +10,9 @@
         "irazasyed/telegram-bot-sdk": "^3.9",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "pavlokrostylov/php-trello-api": "^0.9.10",
+        "spatie/laravel-data": "^2.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
