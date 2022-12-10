@@ -17,8 +17,9 @@ class StartCommand extends Command
     public function handle()
     {
         $result = $this->getTelegram()->getWebhookUpdate();
-        $userFirstName = isset($result["message"]["from"]["first_name"]) ? $result["message"]["from"]["first_name"] : "";
-        $userLastName = isset($result["message"]["from"]["last_name"]) ? $result["message"]["from"]["last_name"] : "";
+//        $userFirstName = isset($result["message"]["from"]["first_name"]) ? $result["message"]["from"]["first_name"] : "";
+        $userFirstName = $result->message->from->first_name ?? "";
+        $userLastName = $result->message->from->last_name ?? "";
 
         $this->replyWithChatAction([
             'action' => Actions::TYPING,
@@ -33,7 +34,7 @@ class StartCommand extends Command
                 ]);
             }
             $this->replyWithMessage([
-                'text' => 'Привіт '. $userFirstName .'! Ласкаво прошу',
+                'text' => 'Привіт '. $userFirstName . ' ' . $userLastName .'! Ласкаво прошу',
             ]);
         }
 

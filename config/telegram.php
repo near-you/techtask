@@ -1,5 +1,6 @@
 <?php
 
+use App\Commands\CreateTrelloDesk;
 use App\Commands\StartCommand;
 
 return [
@@ -114,7 +115,7 @@ return [
     */
     'commands'                     => [
         StartCommand::class,
-
+        CreateTrelloDesk::class,
     ],
 
     /*
