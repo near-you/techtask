@@ -1,6 +1,8 @@
 <?php
 
-use App\Commands\CreateTrelloDesk;
+use App\Commands\CreateTrelloCardDone;
+use App\Commands\CreateTrelloCardInProgress;
+use App\Commands\CreateTrelloCardToDo;
 use App\Commands\StartCommand;
 
 return [
@@ -115,7 +117,9 @@ return [
     */
     'commands'                     => [
         StartCommand::class,
-        CreateTrelloDesk::class,
+        CreateTrelloCardToDo::class,
+        CreateTrelloCardInProgress::class,
+        CreateTrelloCardDone::class,
     ],
 
     /*
