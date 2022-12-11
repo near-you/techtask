@@ -12,6 +12,8 @@ class Pm extends Model
     protected $table = 'pm';
 
     protected $fillable = [
+        'user_id',
+        'chat_id',
         'first_name',
         'last_name',
     ];

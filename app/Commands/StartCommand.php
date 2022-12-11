@@ -12,30 +12,34 @@ class StartCommand extends Command
 {
     protected $name = 'start';
 
-    protected $description = 'Start command';
+    protected $description = 'Команда для привітання нового користувача та запису його в базу даних';
 
     public function handle()
     {
         $result = $this->getTelegram()->getWebhookUpdate();
 //        $userFirstName = isset($result["message"]["from"]["first_name"]) ? $result["message"]["from"]["first_name"] : "";
-        $userFirstName = $result->message->from->first_name ?? "";
-        $userLastName = $result->message->from->last_name ?? "";
+        $userId = $result->message->from->id ?? 0;
+        $chatId = $result["message"]["chat"]["id"] ?? 0;
+        $userFirstName = $result->message->from->first_name ?? '';
+        $userLastName = $result->message->from->last_name ?? '';
+
 
         $this->replyWithChatAction([
             'action' => Actions::TYPING,
         ]);
 
-
-        if (isset($userFirstName)) {
-            if (!Pm::query()->where('first_name', $userFirstName)->exists()) {
+        if (!empty($userId)) {
+            if (!Pm::query()->where('user_id', $userId)->exists()) {
                 Pm::query()->create([
+                    'user_id' => $userId,
+                    'chat_id' => $chatId,
                     'first_name' => $userFirstName,
                     'last_name' => $userLastName,
                 ]);
             }
-            $this->replyWithMessage([
-                'text' => 'Привіт '. $userFirstName . ' ' . $userLastName .'! Ласкаво прошу',
-            ]);
+                $this->replyWithMessage([
+                    'text' => 'Привіт '. $userFirstName . ' ' . $userLastName .'! Ласкаво прошу',
+                ]);
         }
 
         $response = '';
@@ -45,6 +49,7 @@ class StartCommand extends Command
             $response .= sprintf('/%s - %s' . PHP_EOL, $name, $command->getDescription());
         }
 
+        $response .= "\n\n Прейти до дошки - https://trello.com/b/vcULQAGS/tasks";
         $this->replyWithMessage([
             'text' => $response,
         ]);
